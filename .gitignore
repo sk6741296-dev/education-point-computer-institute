@@ -30,8 +30,13 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env.local*
+# env files
+.env
+.env*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 
 # vercel
@@ -43,3 +48,9 @@ next-env.d.ts
 
 # local downloads
 /downloads/
+
+# scratch helper scripts and archives
+*.zip
+copy_images.js
+zip-project.js
+shopify-theme-from-scratch/

@@ -1,87 +1,68 @@
-# StoreSnap Agent
+# StoreSnap Agent - Team Setup Guide
 
-## Purpose
-StoreSnap Agent is a local-first application designed to extract and archive business data, reviews, and high-quality images from Google Maps. It serves as a developer tool to download rich location datasets seamlessly without needing to manually inspect pages or scrape images one by one.
+Welcome to the **StoreSnap** project! This tool allows you to easily download all business images, reviews, and data directly from Google Maps. 
 
-## Features
-- **URL Validation**: Verifies standard Google Maps location URLs before processing.
-- **Data Scraping**: Uses Apify to extract rich data (business name, rating, total reviews).
-- **Review Archival**: Saves raw, unedited user reviews exactly as provided.
-- **Image Downloading**: Automatically streams and downloads both business gallery images and review-attached images without quality loss.
-- **Automated Zipping**: Bundles the entire downloaded dataset into a portable ZIP file upon completion.
-- **Local Dashboard**: Offers a sleek, glassmorphic UI to manage and open local downloaded folders.
+Because this tool downloads large amounts of images and files directly to your laptop, it **must be run locally on your own computer**, not on a cloud server. 
 
-## Requirements
-- Node.js (v18+)
-- An active [Apify](https://apify.com/) account
-- Windows/macOS/Linux environment
+Please follow these exact steps to set up and run the app on your laptop.
 
-## Installation
-1. Clone this repository to your local machine.
-2. Install dependencies:
+---
+
+## Step 1: Install Node.js
+If you don't already have Node.js installed on your laptop, you need it to run this project.
+1. Go to [Node.js Official Website](https://nodejs.org/).
+2. Download the **LTS (Long Term Support)** version.
+3. Install it using the standard setup wizard.
+
+---
+
+## Step 2: Download the Code from GitHub
+1. Go to our GitHub repository.
+2. Click the green **"Code"** button.
+3. Click **"Download ZIP"**.
+4. Extract (unzip) the downloaded folder anywhere on your laptop (for example, on your Desktop).
+5. Open this extracted folder inside your code editor (like **VS Code**).
+
+---
+
+## Step 3: Install Required Packages
+1. Open the Terminal inside VS Code (Go to `Terminal` -> `New Terminal`).
+2. Run the following command to download all the necessary project files:
    ```bash
    npm install
    ```
+   *(Wait a minute or two for this to finish).*
 
-## Environment Variables
-The application requires an Apify API token and Actor configuration. Create a `.env.local` file in the root of the project with the following keys.
+---
 
-### Example `.env.local`
+## Step 4: Create the `.env.local` File (CRITICAL)
+For security reasons, our API keys are not uploaded to GitHub. You must create a configuration file manually.
+
+1. Inside the main project folder in VS Code, create a new file and name it exactly: `.env.local`
+2. Open this new `.env.local` file and paste the following code into it:
+
 ```env
+# Your Apify API Token (Replace this with your actual token)
 APIFY_API_TOKEN=your_apify_api_token_here
+
+# Do not change these lines
 APIFY_ACTOR_ID=compass/crawler-google-places
-APIFY_TIMEOUT_SECONDS=120
-MAX_BUSINESS_IMAGES=100
-MAX_REVIEW_IMAGES=100
+APIFY_TIMEOUT_SECONDS=3600
+MAX_BUSINESS_IMAGES=99999
+MAX_REVIEW_IMAGES=99999
 ```
 
-## How to Run
-1. Start the development server:
+> **Note:** If you do not have an Apify API Token yet, please open the `APIFY_GUIDE.md` file in this folder. Copy its text, paste it into ChatGPT, and ChatGPT will guide you step-by-step on how to get your token for free!
+
+---
+
+## Step 5: Start the App!
+1. In your VS Code Terminal, type:
    ```bash
    npm run dev
    ```
-2. Open your browser and navigate to `http://localhost:3000`.
-3. Paste a supported Google Maps URL into the input field and click "Download".
+2. Wait a few seconds until the terminal says "Ready" or "Compiled successfully".
+3. Open your web browser (Chrome, Edge, etc.) and go to:
+   **http://localhost:3000**
 
-## Supported Input
-The application accepts standard Google Maps Place URLs.
-### Example Google Maps URL:
-`https://www.google.com/maps/place/Empire+State+Building/@40.7484405,-73.9856644,17z/data=!3m1!4b1!4m6!3m5!1s0x89c259a9b3117469:0xd134e199a405a163!8m2!3d40.7484405!4d-73.9856644!16zL20vMDJuZHA`
-
-## Folder Structure
-```text
-storesnapai/
-├── src/
-│   ├── app/
-│   │   ├── api/
-│   │   │   ├── downloads/
-│   │   │   ├── open-folder/
-│   │   │   └── scrape/
-│   │   ├── globals.css
-│   │   ├── layout.tsx
-│   │   └── page.tsx
-├── downloads/                  # Auto-generated destination for local scraping
-├── public/
-├── package.json
-├── tailwind.config.ts
-└── .env.local                  # Environment variables (not committed)
-```
-
-## Output Files
-When a scrape is successful, the app generates a timestamped folder inside `downloads/` containing:
-- `business.json`: Core business details (Name, Rating, Review Count).
-- `reviews.json`: The complete list of unedited reviews.
-- `raw-response.json`: The raw JSON payload from the Apify actor.
-- `download-report.json`: Analytics of found vs. downloaded images and failures.
-- `images/`: Directory containing all high-resolution business gallery images.
-- `review-images/`: Directory containing all images attached to user reviews.
-- `<Business_Name>_YYYY-MM-DD_HH-MM-SS.zip`: A compressed archive of the entire folder.
-
-### Example Output (`business.json`)
-```json
-{
-  "Business Name": "Empire State Building",
-  "Rating": 4.7,
-  "Review Count": 127669
-}
-```
+You will see the StoreSnap interface. Just paste a Google Maps URL, click download, and all images and data will be saved inside a `downloads` folder directly on your computer!
