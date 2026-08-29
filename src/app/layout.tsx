@@ -1,27 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
-  title: "Education Point Computer Institute (Regd.)",
-  description: "Education Point Computer Institute (Regd.) in Palam, New Delhi. Prominent computer education centre offering Computer Basics, DTP (Photoshop & CorelDraw), BCA/MCA support, and certified courses.",
-  icons: {
-    icon: [
-      { url: "/icon.svg", type: "image/svg+xml" }
-    ],
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
-  },
+  title: "FASHION STORY | Fashion Store in Ashok Vihar, Delhi",
+  description:
+    "Discover contemporary fashion and curated clothing collections at FASHION STORY in Ashok Vihar, Delhi. Open daily 10:30 AM to 9:00 PM.",
+  keywords: [
+    "FASHION STORY",
+    "Clothing Store Ashok Vihar",
+    "Fashion Boutique Delhi",
+    "Latest Fashion Trends Delhi",
+    "Boutique Ashok Vihar Phase 3",
+  ],
+  authors: [{ name: "FASHION STORY" }],
 };
 
 export default function RootLayout({
@@ -30,11 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en">
+      <body className="bg-silk text-obsidian min-h-screen antialiased selection:bg-champagne selection:text-obsidian">
+        {children}
+      </body>
     </html>
   );
 }
